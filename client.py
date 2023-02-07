@@ -42,6 +42,9 @@ def getDataPoint(quote):
 def getRatio(price_a, price_b):
     """ Get ratio of price_a and price_b """
     """ ------------- Update this function ------------- """
+    """case 1: price_b = 0 --> zero division error"""
+    if price_b == 0 :
+        return 0
     return price_a / price_b
 
 
@@ -52,7 +55,8 @@ if __name__ == "__main__":
         quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
 
         """ ----------- Update to get the ratio --------------- """
-        prices = {};
+        """use a dictionary to store the prices"""
+        prices = {}
         for quote in quotes:
             stock, bid_price, ask_price, price = getDataPoint(quote)
             prices[stock] = price
